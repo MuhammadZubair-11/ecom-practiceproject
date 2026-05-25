@@ -7,6 +7,7 @@ import Settings from "./Views/Settings/Settings";
 import ChatbotBuilder from "./Views/ChatbotBuilder/ChatbotBuilder";
 import LandingLayout  from '../src/layout/LandingLayout'
 import WishListProducts from "./Views/Landing/components/Content/WishListProducts";
+import Cart from "./Views/Landing/components/Content/cart";
 
 export default function Router() {
   const isAuthenticated  = false;
@@ -33,10 +34,11 @@ export default function Router() {
           path:"/wishlist" ,
           element: <WishListProducts />,
         },
-          {
-          path:"/chatbot-builder" ,
-          element: <ChatbotBuilder />,
+           {
+          path:"/cart" ,
+          element: <Cart />,
         },
+         
       ],
     },
   ]);
