@@ -6,28 +6,26 @@ import {
   IoArrowForward,
 } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { removefromcart } from "../../../../store/reducers/CartSlice";
+import {
+  descreasequantity,
+  increasequantity,
+  removefromcart,
+} from "../../../../store/reducers/CartSlice";
 
 const Cart = () => {
-    const dispatch=useDispatch()
- const cartitems = useSelector((state)=> state.cart.cartitems)
- console.log(cartitems,'cartitemscartitems')
-//   const subtotal = cartItems.reduce(
-//     (acc, item) => acc + item.price * item.quantity,
-//     0,
-//   );
+  const dispatch = useDispatch();
+  const cartitems = useSelector((state) => state.cart.cartitems);
 
-const handleremovecart=()=>{
-    dispatch(removefromcart())
-}
+  const subtotal = cartitems.reduce(
+    (state, item) => state + item.price * item.quantity,
+    0,
+  );
 
   return (
     <div className="min-h-screen bg-gray-100 px-6 py-16">
       {/* Heading */}
       <div className="max-w-7xl mx-auto mb-12">
-        <h1 className="text-5xl font-extrabold text-gray-900">
-          Shopping Cart
-        </h1>
+        <h1 className="text-5xl font-extrabold text-gray-900">Shopping Cart</h1>
 
         <p className="text-gray-500 mt-3 text-lg">
           Review your selected products before checkout
@@ -65,7 +63,10 @@ const handleremovecart=()=>{
                     </h2>
                   </div>
 
-                  <button onClick={handleremovecart} className="text-gray-400 hover:text-red-500 transition">
+                  <button
+                    onClick={() => dispatch(removefromcart(item.id))}
+                    className="text-gray-400 hover:text-red-500 transition"
+                  >
                     <IoTrashOutline size={24} />
                   </button>
                 </div>
@@ -74,40 +75,44 @@ const handleremovecart=()=>{
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-6 gap-4">
                   {/* Quantity */}
                   <div className="flex items-center gap-4 bg-gray-100 px-4 py-2 rounded-full w-fit">
-                    <button className="text-xl">
+                    <button
+                      onClick={() => dispatch(descreasequantity(item.id))}
+                      className="text-xl"
+                    >
                       <IoRemove />
                     </button>
 
-                    {/* <span className="font-semibold text-lg">
+                    <span className="font-semibold text-lg">
                       {item.quantity}
-                    </span> */}
+                    </span>
 
-                    <button className="text-xl">
+                    <button
+                      onClick={() => dispatch(increasequantity(item.id))}
+                      className="text-xl"
+                    >
                       <IoAdd />
                     </button>
                   </div>
 
                   {/* Price */}
-                  {/* <h3 className="text-3xl font-extrabold text-black">
-                    ${item.price * item.quantity}
-                  </h3> */}
+                  <h3 className="text-3xl font-extrabold text-black">
+                    ${item?.price * item?.quantity}
+                  </h3>
                 </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Summary */}
         <div className="bg-white rounded-3xl shadow-md p-8 h-fit sticky top-10">
           <h2 className="text-3xl font-bold text-gray-900 mb-8">
             Order Summary
           </h2>
 
-          {/* Summary Items */}
           <div className="space-y-5">
             <div className="flex justify-between text-lg">
               <span className="text-gray-500">Subtotal</span>
-              {/* <span className="font-semibold">${subtotal}</span> */}
+              <span className="font-semibold">${subtotal}</span>
             </div>
 
             <div className="flex justify-between text-lg">
@@ -122,7 +127,7 @@ const handleremovecart=()=>{
 
             <div className="border-t pt-5 flex justify-between text-2xl font-extrabold">
               <span>Total</span>
-              {/* <span>${subtotal + 20 + 10}</span> */}
+              <span>${subtotal + 20 + 10}</span>
             </div>
           </div>
 

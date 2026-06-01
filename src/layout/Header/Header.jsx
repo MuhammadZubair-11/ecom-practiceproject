@@ -10,9 +10,7 @@ export default function Header() {
   const [opensidear, setopensidebar] = useState(false);
   const wishlistitems = useSelector((state) => state.wishlist.items.length);
   const cartitems = useSelector((state) => state.cart.cartitems.length);
-  console.log(cartitems,'cartitemscartitems')
 
-  console.log(wishlistitems, "cnjdncjdcnjd");
   const handlewishlist = () => {
     navigate("/wishlist");
   };
